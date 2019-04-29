@@ -7,7 +7,7 @@ let s:loaded = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-let s:secret = $REMOTE_COPY_SECRET
+let s:secret = $REMOTE_COPY_SECERT
 
 function! remotecopy#docopy(visual, line1, line2)
     " if it's a visual selection
@@ -18,7 +18,7 @@ function! remotecopy#docopy(visual, line1, line2)
         let old_regtype=getregtype('"')
 
         " grab the last visual selection
-        normal! gvy
+        silent! normal! gvy
 
         " send it
         call s:rcopy(getreg('"'))
@@ -41,7 +41,7 @@ function! remotecopy#copyreg()
 endfunction
 
 function s:rcopy(data)
-    let output = system("remotecopy -n -s ".s:secret, a:data)
+    let output = system("remotecopy -n -s ".shellescape(s:secret), a:data)
     if v:shell_error
         if v:shell_error == 1
             " if it's exit code 1, then we need to reauth
