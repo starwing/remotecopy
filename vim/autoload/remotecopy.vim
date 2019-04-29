@@ -7,7 +7,7 @@ let s:loaded = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-let s:secret = 'none'
+let s:secret = $REMOTE_COPY_SECRET
 
 function! remotecopy#docopy(visual, line1, line2)
     " if it's a visual selection

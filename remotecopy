@@ -22,7 +22,7 @@ pod2usage( -exitstatus => 0, -verbose => 2 ) if exists $options{man};
 
 my $config = load_config();
 
-my $secret = $options{secret} ||= '';
+my $secret  = $options{secret} ||= $ENV{REMOTE_COPY_SECRET};
 my $address = $config->{client_address} || $options{address} || '127.0.0.1';
 my $port    = $config->{port}           || $options{port}    || 12345;
 
